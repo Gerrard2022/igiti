@@ -53,8 +53,8 @@ export async function PATCH(
       description: string;
       variants: {
         inStock: number;
-        sizeId: string;
-        colorId: string;
+        size: string;
+        color: string;
       }[];
     };
 
@@ -162,8 +162,8 @@ export async function PATCH(
               ...variants.map(
                 (variant: {
                   inStock: number;
-                  sizeId: string;
-                  colorId: string;
+                  size: string;
+                  color: string;
                 }) => variant
               ),
             ],

@@ -70,3 +70,4 @@ export const getGraphRevenue = async (
 
   return graphData;
 };
+

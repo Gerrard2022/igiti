@@ -42,8 +42,8 @@ import {
 } from "@/components/ui/select";
 
 const variantSchema = z.object({
-  sizeId: z.string().min(1).nullable(),
-  colorId: z.string().min(1).nullable(),
+  size: z.string().min(1).nullable(),
+  color: z.string().min(1).nullable(),
   inStock: z.coerce.number().min(1),
 });
 
@@ -115,8 +115,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           description: "",
           variants: [
             {
-              sizeId: "",
-              colorId: "",
+              size: "",
+              color: "",
               inStock: 1,
             },
           ],
@@ -128,6 +128,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   const onSubmit = async (data: ProductFormValues) => {
     try {
       setLoading(true);
+      console.log("data here", data);
+      
       if (initialData) {
         await axios.patch(
           `/api/${params.storeId}/products/${params.productId}`,
@@ -407,18 +409,17 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                 ...variants,
                               ];
                               if (newVariants[index]) {
-                                newVariants[index].colorId =
-                                  value;
+                                newVariants[index].color = value;
                                 field.onChange(newVariants);
                               }
                             }}
-                            value={variant.colorId || ""}
+                            value={variant.color || ""}
                           >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue
                                   defaultValue={
-                                    variant.colorId || ""
+                                    variant.color || ""
                                   }
                                   placeholder="Select a color"
                                 />
@@ -445,17 +446,19 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                               const newVariants = [
                                 ...variants,
                               ];
-                              newVariants[index].sizeId =
-                                value;
-                              field.onChange(newVariants);
+                              if (newVariants[index]) {
+                                newVariants[index].size = value;
+                                field.onChange(newVariants);
+                              }
+                              
                             }}
-                            value={variant.sizeId || ""}
+                            value={variant.size || ""}
                           >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue
                                   defaultValue={
-                                    variant.sizeId || ""
+                                    variant.size || ""
                                   }
                                   placeholder="Select a size"
                                 />
@@ -511,8 +514,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                 form.setValue("variants", [
                                   ...form.watch("variants"),
                                   {
-                                    colorId: "default",
-                                    sizeId: "default",
+                                    color: "default",
+                                    size: "default",
                                     inStock: 1,
                                   },
                                 ])

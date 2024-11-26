@@ -12,13 +12,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
-import SizeTable from "./size-table";
 
 interface InfoProps {
   data: Product;
 }
 
 const Info: React.FC<InfoProps> = ({ data }) => {
+  console.log("data is HERE", data);
+  
   const cart = useCart();
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -26,17 +27,17 @@ const Info: React.FC<InfoProps> = ({ data }) => {
     useState<string[]>([]);
 
   const colorOptions = Array.from(
-    new Set(data.variants.map((variant) => variant.colorId))
+    new Set(data.variants.map((variant) => variant.color))
   );
 
   const onColorSelect = (color: string) => {
     setSelectedColor(color);
     const relatedVariants = data.variants.filter(
-      (variant) => variant.colorId === color
+      (variant) => variant.color === color
     );
     const relatedSizes = Array.from(
       new Set(
-        relatedVariants.map((variant) => variant.sizeId)
+        relatedVariants.map((variant) => variant.size)
       )
     );
     setFilteredSizeOptions(relatedSizes);
@@ -45,8 +46,8 @@ const Info: React.FC<InfoProps> = ({ data }) => {
   const onAddToCart = () => {
     const variantToAdd = data.variants.find(
       (variant) =>
-        variant.colorId === selectedColor &&
-        variant.sizeId === selectedSize
+        variant.color === selectedColor &&
+        variant.size === selectedSize
     );
 
     if (variantToAdd) {
@@ -119,15 +120,6 @@ const Info: React.FC<InfoProps> = ({ data }) => {
           </AccordionItem>
         </Accordion>
 
-        {/* Description */}
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>Size table</AccordionTrigger>
-            <AccordionContent>
-              <SizeTable />
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
 
         {/* Add to cart */}
         <div className="flex items-center mt-4 gap-x-3">

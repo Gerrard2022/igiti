@@ -110,13 +110,11 @@ export async function POST(
         variants: {
           createMany: {
             data: [
-              ...variants.map(
-                (variant: {
-                  inStock: number;
-                  sizeId: string;
-                  colorId: string;
-                }) => variant
-              ),
+              ...variants.map((variant: { inStock: number; size: string; color: string }) => ({
+                inStock: variant.inStock,
+                size: variant.size,
+                color: variant.color,
+              })),
             ],
           },
         },
@@ -152,7 +150,7 @@ export async function GET(
     const name = searchParams.get("name") || undefined;
     const isFeatured = searchParams.get("isFeatured");
     const colorId =
-      searchParams.get("colorId") || undefined;
+      searchParams.get("color") || undefined;
     const sizeId = searchParams.get("sizeId") || undefined;
 
     if (!params.storeId) {
@@ -170,8 +168,8 @@ export async function GET(
         isArchived: false,
         variants: {
           some: {
-            colorId: colorId,
-            sizeId: sizeId,
+            color: colorId,
+            size: sizeId,
           },
         },
       },

@@ -41,7 +41,7 @@ const OrdersPage = async ({
       variants: JSON.stringify(
         item.orderItems.map(
           (orderItem) =>
-            `${orderItem.variant?.colorId} - ${orderItem.variant?.sizeId}`
+            `${orderItem.variant?.color} - ${orderItem.variant?.size}`
         )
       ),
       quantity: JSON.stringify(

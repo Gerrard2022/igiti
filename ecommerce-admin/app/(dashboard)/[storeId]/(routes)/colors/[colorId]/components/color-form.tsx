@@ -83,7 +83,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({
       setLoading(true);
       if (initialData) {
         await axios.patch(
-          `/api/${params.storeId}/colors/${params.colorId}`,
+          `/api/${params.storeId}/colors/${params.color}`,
           data
         );
       } else {
@@ -106,7 +106,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({
     try {
       setLoading(true);
       await axios.delete(
-        `/api/${params.storeId}/colors/${params.colorId}`
+        `/api/${params.storeId}/colors/${params.color}`
       );
       router.refresh();
       router.push(`/${params.storeId}/colors`);

@@ -19,6 +19,9 @@ interface CartItemProps {
 const CartItem: React.FC<CartItemProps> = ({ data }) => {
   const cart = useCart();
 
+
+  
+
   return (
     <li className="flex py-6 border-b">
       {/* Product info - Image -> Name -> Color -> Size */}
@@ -40,13 +43,13 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
               <div className="flex flex-row">
                 <p className="text-gray-500">Color: </p>
                 <p className="font-semibold">
-                  &nbsp;{data.variant.colorId}
+                  &nbsp;{data.variant.color}
                 </p>{" "}
               </div>
               <div className="flex flex-row">
                 <p className="text-gray-500 ">Size:</p>
                 <p className="font-semibold">
-                  &nbsp;{data.variant.sizeId}
+                  &nbsp;{data.variant.size}
                 </p>{" "}
               </div>
             </div>

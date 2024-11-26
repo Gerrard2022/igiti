@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { CldUploadWidget } from "next-cloudinary";
 import { ImagePlus, Trash } from "lucide-react";
 
@@ -48,7 +47,7 @@ const ImageUpload: React.FC<imageUploadProps> = ({
             </div>
           ))}
         </div>
-        <CldUploadWidget onUpload={onUpload} uploadPreset="e819yzjl">
+        <CldUploadWidget onUpload={onUpload} uploadPreset="ecommerce">
           {({ open }) => {
             const onClick = () => {
               open();
